@@ -1,0 +1,32 @@
+version: "3"
+services:
+  # Front
+  sp-boot-chat-front:
+    image: sp-boot-chat:latest
+    #image: openjdk-itop:latest
+    container_name: sp-boot-chat-front
+    ports:
+      - "8082:8080"
+    restart: always
+    networks:
+      - spb-net
+  # RabbitMQ back
+  sp-boot-chat-rabbit:
+    image: rabbit-ws-io:latest  
+    container_name: sp-boot-chat-rabbit
+    ports:
+      - "5672:5672"
+      - "25672:25672"
+      - "15674:15674"
+      - "61613:61613" 
+      - "15672:15672"
+    restart: always
+    networks:
+      - spb-net
+
+# Networks
+networks:
+  spb-net:
+    driver: bridge
+    #name: svc
+
